@@ -1,0 +1,28 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: jira-ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+  type: gp2
+  iopsPerGB: "100"
+  encrypted: "true"
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: ebs-sc
+# provisioner: kubernetes.io/aws-ebs
+# parameters:
+#   type: gp2             # EBS 볼륨 유형 (gp2, gp3, io1, sc1, st1 등)
+#   fsType: ext4          # 파일 시스템 유형 (ext4, xfs 등)
+#   encrypted: "true"     # 볼륨 암호화 여부
+#   kmsKeyId: <your-kms-key-id>  # 암호화에 사용할 KMS 키 ID (optional)
+#   iopsPerGB: "10"       # io1 유형의 경우 지정된 IOPS 수 (optional)
+#   throughput: "125"     # gp3 유형의 경우 스루풋 (MiB/s, optional)
+# reclaimPolicy: Retain   # 볼륨 삭제 시 동작 (Retain, Delete, Recycle)
+# volumeBindingMode: WaitForFirstConsumer  # 볼륨 바인딩 모드 (Immediate, WaitForFirstConsumer)
+# allowVolumeExpansion: true  # 볼륨 확장 허용 여부

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jira-shared-pvc
+  namespace: atlassian
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: jira-efs-sc
+  volumeMode: Filesystem
+  volumeName: jira-shared-pv
+  resources:
+    requests:
+      storage: 500Gi
